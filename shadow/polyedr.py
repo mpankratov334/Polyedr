@@ -69,6 +69,13 @@ class Edge:
     def r3(self, t):
         return self.beg * (Edge.SFIN - t) + self.fin * t
 
+    # Находится ли точка внутри куба единичного
+    # объёма с центром в начале координат
+    def is_inside_cube(self, r3point):
+            return True if r3point.x <= 0.5 and r3point.y <= 0.5 and \
+                r3point.z <= 0.5 and r3point.x >= -0.5 and \
+                    r3point.y >= -0.5 and r3point.z >= -0.5 else False
+
     # Пересечение ребра с полупространством, задаваемым точкой (a)
     # на плоскости и вектором внешней нормали (n) к ней
     def intersect_edge_with_normal(self, a, n):
@@ -158,7 +165,7 @@ class Polyedr:
                         self.edges.append(Edge(vertexes[n - 1], vertexes[n]))
                     # задание самой грани
                     self.facets.append(Facet(vertexes))
-
+            self.c = c
     # Метод изображения полиэдра
     def draw(self, tk):
         sum = 0
@@ -167,9 +174,15 @@ class Polyedr:
             for f in self.facets:
                 e.shadow(f)
             for s in e.gaps:
-                if s.beg == 0 and s.fin == 1 and
+                if s.beg == 0 and s.fin == 1 and \
                  not e.is_inside_cube(e.r3(0.5)):
+                    print(f"Начало :  {e.r3(0).x/self.c} {e.r3(0).y/self.c} {e.r3(0).z/self.c}")
+                    print(f"Конец :  {e.r3(1).x/self.c} {e.r3(1).y/self.c} {e.r3(1).z/self.c}")
                     sum += sqrt((e.r3(1).x - e.r3(0).x)**2 +
                     (e.r3(1).y - e.r3(0).y)**2 + (e.r3(1).z - e.r3(0).z)**2)
+                elif s.beg == 0 and s.fin == 1 and \
+                    e.is_inside_cube(e.r3(0.5)) :
+                    print(f"Центр :  {e.r3(0.5).x/self.c} {e.r3(0.5).y/self.c} {e.r3(0.5).z/self.c}")
+
                 tk.draw_line(e.r3(s.beg), e.r3(s.fin))
-        print(sum)
+        print(f"the sum is {sum/self.c}")
