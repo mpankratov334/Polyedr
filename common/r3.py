@@ -19,7 +19,7 @@ class R3:
     # Умножение на число
     def __mul__(self, k):
         return R3(k * self.x, k * self.y, k * self.z)
-
+        
     # Поворот вокруг оси Oz
     def rz(self, fi):
         return R3(
