@@ -33,7 +33,8 @@ class TestPolyedr_hw:
         tk7.close()
         # так как результат посчитан в геогебре
         # с округлением до 2 знаков после запятой
-        assert 29.02 * polyedr.c * 0.99 < polyedr.sum < 29.02 * polyedr.c * 1.01
+        assert 29.02 * polyedr.c * 0.99 < polyedr.sum and \
+               polyedr.sum < 29.02 * polyedr.c * 1.01
 
     def test_9(self):
         tk9 = tk()
@@ -42,7 +43,8 @@ class TestPolyedr_hw:
         tk9.close()
         # так как результат посчитан в геогебре
         # с округлением до 2 знаков после запятой
-        assert 11.18 * polyedr.c * 0.99 < polyedr.sum < 11.18 * polyedr.c * 1.01
+        assert 11.18 * polyedr.c * 0.99 < polyedr.sum and \
+               polyedr.sum < 11.18 * polyedr.c * 1.01
 
     def test_10(self):
         tk10 = tk()
@@ -51,4 +53,5 @@ class TestPolyedr_hw:
         tk10.close()
         # так как результат посчитан в геогебре
         # с округлением до 2 знаков после запятой
-        assert 18.13 * polyedr.c * 0.99 < polyedr.sum < 18.13 * polyedr.c * 1.01
+        assert 18.13 * polyedr.c * 0.99 < polyedr.sum and \
+               polyedr.sum < 18.13 * polyedr.c * 1.01

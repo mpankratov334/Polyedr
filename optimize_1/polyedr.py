@@ -1,4 +1,4 @@
-from math import pi
+from math import pi, sqrt
 from time import time
 from functools import reduce
 from operator import add
@@ -70,6 +70,13 @@ class Edge:
     def r3(self, t):
         return self.beg * (Edge.SFIN - t) + self.fin * t
 
+    # Находится ли точка не строго внутри куба единичного
+    # объёма с центром в начале координат
+    def is_inside_cube(self, r3point):
+        return True if r3point.x <= 0.5 and r3point.y <= 0.5 and \
+            r3point.z <= 0.5 and r3point.x >= -0.5 and \
+            r3point.y >= -0.5 and r3point.z >= -0.5 else False
+
     # Пересечение ребра с полупространством, задаваемым точкой (a)
     # на плоскости и вектором внешней нормали (n) к ней
     def intersect_edge_with_normal(self, a, n):
@@ -137,6 +144,7 @@ class Polyedr:
                     buf = line.split()
                     # коэффициент гомотетии
                     c = float(buf.pop(0))
+                    self.c = c
                     # углы Эйлера, определяющие вращение
                     alpha, beta, gamma = (float(x) * pi / 180.0 for x in buf)
                 elif i == 1:

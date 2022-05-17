@@ -76,8 +76,8 @@ class Edge:
         # Поворот точки 0.5, 0.5, 0.5
         A = R3(0.5, 0.5, 0.5)
         if abs(point.x) <= abs(A.x) and \
-        abs(point.y) <= abs(A.y) and \
-                abs(point.z) <= abs(A.z):
+           abs(point.y) <= abs(A.y) and \
+           abs(point.z) <= abs(A.z):
             return True
         else:
             return False
@@ -152,7 +152,7 @@ class Polyedr:
                     self.c = c
                     # углы Эйлера, определяющие вращение
                     self.alpha, self.beta, self.gamma = \
-                    (float(x) * pi / 180.0 for x in buf)
+                        (float(x) * pi / 180.0 for x in buf)
                 elif i == 1:
                     # во второй строке число вершин, граней и рёбер полиэдра
                     nv, nf, ne = (int(x) for x in line.split())
@@ -173,7 +173,6 @@ class Polyedr:
                         self.edges.append(Edge(vertexes[n - 1], vertexes[n]))
                     # задание самой грани
                     self.facets.append(Facet(vertexes))
-
 
     # Удаление дубликатов рёбер
     def edges_uniq(self):
@@ -208,7 +207,7 @@ class Polyedr:
 
     # Метод изображения полиэдра
     def draw(self, tk):
-        #print(f"{0.5*self.c}, {0.5*self.c}, {0.5*self.c}")
+        # print(f"{0.5*self.c}, {0.5*self.c}, {0.5*self.c}")
         self.sum = 0
         tk.clean()
         self.edges_uniq()
@@ -219,14 +218,13 @@ class Polyedr:
                 if s.beg == 0 and s.fin == 1 and \
                  not e.is_inside_cube(e.r3(0.5)):
                     self.sum += sqrt((e.r3(1).x - e.r3(0).x)**2 +
-                    (e.r3(1).y - e.r3(0).y)**2 + (e.r3(1).z - e.r3(0).z)**2)
-
+                                     (e.r3(1).y - e.r3(0).y)**2 +
+                                     (e.r3(1).z - e.r3(0).z)**2)
                     # print(f"засчитан :{round(e.r3(0.5).x,4)},
                     # {round(e.r3(0.5).y,4)}, {round(e.r3(0.5).z,4)}")
                 # elif s.beg == 0 and s.fin == 1 and \
                 #    e.is_inside_cube(e.r3(0.5)):
                     # print(f"не засчитан :{round(e.r3(0.5).x,4)},
                     # {round(e.r3(0.5).y,4)}, {round(e.r3(0.5).z,4)}")
-
                 tk.draw_line(e.r3(s.beg), e.r3(s.fin))
         print(f"the sum is {self.sum}")

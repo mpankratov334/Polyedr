@@ -69,12 +69,6 @@ class Edge:
     def r3(self, t):
         return self.beg * (Edge.SFIN - t) + self.fin * t
 
-    # Проверка точки на принадлежность кубу единичного
-    # объёма с центром в начале координат
-    def is_inside_cube(self, r3point):
-        return True if r3point.x > 0.5 and r3point.y > 0.5 and r3poit.z > 0.5 or
-        r3point.x < -0.5 and r3point.y < -0.5 and r3point.z < -0.5 else False
-
     # Пересечение ребра с полупространством, задаваемым точкой (a)
     # на плоскости и вектором внешней нормали (n) к ней
     def intersect_edge_with_normal(self, a, n):
